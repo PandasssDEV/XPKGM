@@ -8,8 +8,8 @@
 namespace fs = std::filesystem;
 
 static const std::string TMP_BASE = "/tmp/xpkgm";
-
-/* ---------------- TOML PARSER (minimal) ---------------- */
+// Comments explain the working of this code
+/* ---------------- TOML Parser (work in progress) ---------------- */
 
 std::unordered_map<std::string, std::string>
 readToml(const fs::path& path) {
@@ -41,7 +41,7 @@ readToml(const fs::path& path) {
     return data;
 }
 
-/* ---------------- INSTALL ---------------- */
+/* ---------------- Installation funcs and other stuff ---------------- */
 
 void installPackage(const std::string& pkgPath) {
     if (!fs::exists(pkgPath)) {
@@ -110,7 +110,7 @@ void installPackage(const std::string& pkgPath) {
     fs::remove_all(workDir);
 }
 
-/* ---------------- BUILD ---------------- */
+/* ---------------- Building packages  ---------------- */
 
 void makePackage(const std::string& dirPath) {
     if (!fs::exists(dirPath) || !fs::is_directory(dirPath)) {
@@ -167,8 +167,6 @@ void makePackage(const std::string& dirPath) {
     std::cout << "Package created: " << pkgName << "\n";
     fs::remove_all(workDir);
 }
-
-/* ---------------- MAIN ---------------- */
 
 int main(int argc, char** argv) {
     if (argc < 2) {
